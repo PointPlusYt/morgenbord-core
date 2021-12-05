@@ -96,8 +96,12 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
-            "require": "6.0.*"
+            "allow-contrib": true,
+            "require": "6.0.*",
+            "endpoint": [
+                "https://api.github.com/repos/PointPlusYt/morgenbord-flex-recipes/contents/index.json",
+                "flex://defaults"
+            ]
         }
     }
 }
