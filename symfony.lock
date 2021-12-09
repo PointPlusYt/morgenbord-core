@@ -94,6 +94,18 @@
     "monolog/monolog": {
         "version": "2.3.5"
     },
+    "morgenbord/demo-widget-bundle": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/PointPlusYt/morgenbord-flex-recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "e8d301ed62aa63e9e6242eb2b64f3fe415f847d0"
+        },
+        "files": [
+            "config/routes/demo_widget.yaml"
+        ]
+    },
     "myclabs/deep-copy": {
         "version": "1.10.2"
     },

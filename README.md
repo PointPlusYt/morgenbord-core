@@ -1,22 +1,12 @@
-Credits :
-Avatar mug : https://unsplash.com/photos/tAz3Ve2qPio
-Sunrise background : https://unsplash.com/@martinedholm
+## Roadmap to a satisfying 1.0
 
-=========================================================
-* Material Dashboard 2 - v3.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
+- [ ] Write proper README file with installation instructions
+- [ ] Write docs in the repository
+- [x] Create a way to register the widget list
+- [ ] Create the feature to add the widget in the board
 
 ## Features
+
 - [ ] Une seule page avec tout dedans
 - [ ] Agenda du jour avec liens vers les comptes d'agendas associés
 - [ ] Statistiques YouTube
@@ -28,3 +18,25 @@ Sunrise background : https://unsplash.com/@martinedholm
 - [ ] Pris de notes rapides
 - [ ] Articles Wallabag random (5) et nombre d'articles non lus
 - [ ] ~Data Duolingo avec rappel~ Impossible sans API adaptée, je mettrai le lien vers Duolingo à la place. L'occasion d'avoir un lien vers l'app si possible
+
+## Widgets à créer
+
+- [ ] ToDo lists : Add mulitple ToDo lists with deadlines. Has the possibility to make the list public and share it
+- [ ] Habits : List habits and track when they are done. Create graphs for numbered habits and filled squares for done/undone habits
+- [ ] Agenda avec connexion CalDAV, avec un affichage en liste des événements à venir et possiblement plusieurs liens CalDAV
+- [ ] YTStats
+- [ ] IMAP reader to get count unread emails
+- [ ] Favorite links : List of commonly used links
+- [ ] Github notifications
+
+# MorgenBord
+
+# Core concept
+
+MorgenBord is empty, at first. You have to install widgets. You can develop your own widgets. If you want to, you can 
+
+## Credits
+
+Avatar mug : https://unsplash.com/photos/tAz3Ve2qPio
+Sunrise background : https://unsplash.com/@martinedholm
+Material Dashboard 2 v3.0.0 : [Product Page](https://www.creative-tim.com/product/material-dashboard), [Copyright 2021 Creative Tim](https://www.creative-tim.com) under MIT License

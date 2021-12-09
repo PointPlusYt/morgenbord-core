@@ -1,0 +1,3 @@
+demo_widget_controllers:
+    resource: "@DemoWidgetBundle/Controller/"
+    type: annotation

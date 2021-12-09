@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -35,6 +37,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity=UserWidget::class, mappedBy="owner", orphanRemoval=true)
+     */
+    private $userWidgets;
+
+    public function __construct()
+    {
+        $this->userWidgets = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -104,5 +116,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|UserWidget[]
+     */
+    public function getUserWidgets(): Collection
+    {
+        return $this->userWidgets;
+    }
+
+    public function addUserWidget(UserWidget $userWidget): self
+    {
+        if (!$this->userWidgets->contains($userWidget)) {
+            $this->userWidgets[] = $userWidget;
+            $userWidget->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserWidget(UserWidget $userWidget): self
+    {
+        if ($this->userWidgets->removeElement($userWidget)) {
+            // set the owning side to null (unless already changed)
+            if ($userWidget->getOwner() === $this) {
+                $userWidget->setOwner(null);
+            }
+        }
+
+        return $this;
     }
 }

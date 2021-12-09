@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e27f9d63f53a45876ce36f093e35153c",
+    "content-hash": "f970dcff76ba6f8952e10b7cb8bda1e8",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -1754,6 +1754,49 @@
                 }
             ],
             "time": "2021-10-01T21:08:31+00:00"
+        },
+        {
+            "name": "morgenbord/demo-widget-bundle",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PointPlusYt/morgenbord-demo-widget-bundle.git",
+                "reference": "2bc03e3e3326447290d45ad3590e4af79cd56d5c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PointPlusYt/morgenbord-demo-widget-bundle/zipball/2bc03e3e3326447290d45ad3590e4af79cd56d5c",
+                "reference": "2bc03e3e3326447290d45ad3590e4af79cd56d5c",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "MorgenBord\\DemoWidgetBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Djyp Forest Fortin",
+                    "email": "point@plus.yt"
+                }
+            ],
+            "description": "Dummy Widget demo to help create your own widget for Morgenbord",
+            "support": {
+                "issues": "https://github.com/PointPlusYt/morgenbord-demo-widget-bundle/issues",
+                "source": "https://github.com/PointPlusYt/morgenbord-demo-widget-bundle/tree/v1.0"
+            },
+            "time": "2021-12-09T08:47:15+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
