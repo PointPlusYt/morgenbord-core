@@ -3,11 +3,11 @@
 {% block title %}Hello BoardController!{% endblock %}
 
 {% block body %}
-<h1>MorgenBord</h1>
 
+<h3>User's widgets</h3>
 <ul>
-{% for widget in app.request.widgets %}
-    <li>{{ widget.shortname }} - {{ widget.name }} - {{ widget.fqcn }}</li>    
+{% for widget in userWidgets %}
+    <li>{{ include(widget.AtName  ~ '/widget.html.twig') }}</li>    
 {% endfor %}
 </ul>
 {% endblock %}

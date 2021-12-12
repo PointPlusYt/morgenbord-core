@@ -1,9 +1,13 @@
+# MorgenBord
+
 ## Roadmap to a satisfying 1.0
 
+- [x] Create a way to register the widget list
+- [x] Create the feature to add the widget in the board
+- [x] Create the feature to show the user's widgets
+- [ ] Import template to the main project
 - [ ] Write proper README file with installation instructions
 - [ ] Write docs in the repository
-- [x] Create a way to register the widget list
-- [ ] Create the feature to add the widget in the board
 
 ## Features
 

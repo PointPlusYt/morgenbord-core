@@ -2,7 +2,9 @@
 
 namespace App\Controller\Api\V0;
 
+use App\Entity\User;
 use App\Entity\UserWidget;
+use App\Service\LoadWidget;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -24,7 +26,7 @@ class WidgetController extends AbstractController
     }
 
     #[Route('', name: '_register', methods: ['POST'])]
-    public function register(): Response
+    public function register(LoadWidget $loadWidget): Response
     {        
         $widgetDetails = json_decode($this->request->getContent());
 
@@ -32,18 +34,17 @@ class WidgetController extends AbstractController
 
         // Créer un objet à mettre en BDD avec les détails du widget.
         $userWidget = new UserWidget();
-        $userWidget->setWidgetFqcn($registeredWidget->getFqcn());
-        $userWidget->setOwner($this->getUser());
+        $userWidget->setFqcn($registeredWidget->getFqcn());
 
-        // TODO :
-        // Créer un système avec des paramètres par défaut à trouver dans $registeredWidget
-        // et à écraser avec $widgetDetails->parameters
-        // et tout mettre dans $userWidget->parameters.
-        $userWidget->setConfig($widgetDetails->config);
+        // TEMP TO GET actual user
+        $user = $this->manager->getRepository(User::class)->findOneBy([]);
+        $userWidget->setOwner($user);
+
+        $loadWidget->loadParameters($widgetDetails->widget_parameters, $registeredWidget, $userWidget);
 
         $this->manager->persist($userWidget);
-        // $this->manager->flush();
+        $this->manager->flush();
 
-        return $this->json(dd([$this->widgets, $userWidget]));
+        return $this->json([$this->widgets, $userWidget], 200, [], ['groups' => ['read']]);
     }
 }

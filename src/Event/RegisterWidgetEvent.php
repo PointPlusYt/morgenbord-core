@@ -2,7 +2,7 @@
 
 namespace App\Event;
 
-use App\Model\Widget;
+use App\Entity\Widget;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class RegisterWidgetEvent extends Event
@@ -18,15 +18,24 @@ class RegisterWidgetEvent extends Event
 
     public function addWidget(Widget $widget)
     {
-        // TODO : check if widget is already registered
-        $this->widgets[$widget->getShortName()] = $widget;
+        if ($this->hasWidget($widget)) {
+            throw new \InvalidArgumentException('Widget is already registered with this name : ' . $widget->getShortname());
+        } else {
+            $this->widgets[$widget->getShortName()] = $widget;
+        }
     }
 
     public function removeWidget(Widget $widget)
     {
-        $key = array_search($widget, $this->widgets);
-        if ($key !== false) {
-            unset($this->widgets[$key]);
+        if ($this->hasWidget($widget)) {
+            unset($this->widgets[$widget->getShortName()]);
+        } else {
+            throw new \InvalidArgumentException('Widget is not registered and you are trying to remove it');
         }
+    }
+
+    public function hasWidget(Widget $widget): bool
+    {
+        return isset($this->widgets[$widget->getShortName()]);
     }
 }
