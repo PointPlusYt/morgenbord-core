@@ -32,6 +32,8 @@
 - [ ] IMAP reader to get count unread emails
 - [ ] Favorite links : List of commonly used links
 - [ ] Github notifications
+- [ ] Notifications sur les transports locaux
+- [ ] Notifications sur la commune
 
 # MorgenBord
 
@@ -41,6 +43,6 @@ MorgenBord is empty, at first. You have to install widgets. You can develop your
 
 ## Credits
 
-Avatar mug : https://unsplash.com/photos/tAz3Ve2qPio
-Sunrise background : https://unsplash.com/@martinedholm
-Material Dashboard 2 v3.0.0 : [Product Page](https://www.creative-tim.com/product/material-dashboard), [Copyright 2021 Creative Tim](https://www.creative-tim.com) under MIT License
+[Avatar mug](https://unsplash.com/photos/tAz3Ve2qPio)
+[Sunrise background](https://unsplash.com/@martinedholm)
+Using [Tailwind CSS](https://tailwindcss.com) with [Admin Template Night](https://github.com/tailwindtoolbox/Admin-Template-Night)
