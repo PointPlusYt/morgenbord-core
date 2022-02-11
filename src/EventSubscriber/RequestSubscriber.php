@@ -3,6 +3,7 @@
 namespace App\EventSubscriber;
 
 use App\Event\RegisterWidgetEvent;
+use App\Service\WidgetParametersService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -11,10 +12,12 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class RequestSubscriber implements EventSubscriberInterface
 {
     public $eventDispatcher;
+    private $widgetParametersService;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher)
+    public function __construct(EventDispatcherInterface $eventDispatcher, WidgetParametersService $widgetParametersService)
     {
         $this->eventDispatcher = $eventDispatcher;
+        $this->widgetParametersService = $widgetParametersService;
     }
 
     public function onKernelRequest(RequestEvent $event)
@@ -23,6 +26,7 @@ class RequestSubscriber implements EventSubscriberInterface
         // $request->widgets = [];
 
         $registerWidgetEvent = new RegisterWidgetEvent();
+        $registerWidgetEvent->widgetParametersService = $this->widgetParametersService;
 
         $this->eventDispatcher->dispatch(
             $registerWidgetEvent,

@@ -3,11 +3,26 @@
 {% block title %}Hello BoardController!{% endblock %}
 
 {% block body %}
-
-<h3>User's widgets</h3>
-<ul>
-{% for widget in userWidgets %}
-    <li>{{ include(widget.AtName  ~ '/widget.html.twig') }}</li>    
-{% endfor %}
-</ul>
+  <div class="widget-box">
+    <img src="{{ asset('images/logo_white.png')}}" alt="" class="">
+    Ajouter un widget :
+    <ul class="list-none">
+    {% for widget in app.request.widgets %}
+        <li>
+            <form action="{{ path('add_widget') }}" method="post">
+                <input type="hidden" name="shortname" value="{{ widget.shortname }}">
+                <input type="hidden" name="widget_parameters[auto_connect]" value="false">
+                <button>{{ widget.name }}</button>
+        </li>    
+    {% endfor %}
+    </ul>
+  </div>
+  {% for widget in userWidgets %}
+    <div class="widget-box">
+      {{ include(widget.AtName  ~ '/widget.html.twig') }}
+    </div>
+  {% endfor %}
+  <div class="widget-box sm:col-span-2 md:col-span-3">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam temporibus dolorum cupiditate explicabo commodi, sit eaque nihil ipsa, qui est corrupti numquam adipisci deleniti ad? Nobis, aspernatur nesciunt. Facere, blanditiis!</p>
+  </div>
 {% endblock %}
