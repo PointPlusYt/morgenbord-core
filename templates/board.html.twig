@@ -19,7 +19,7 @@
   </div>
   {% for widget in userWidgets %}
     <div class="widget-box">
-      {{ include(widget.AtName  ~ '/widget.html.twig') }}
+      {{ include(widget.AtName  ~ '/widget.html.twig', {'parameters' : widget.parameters}) }}
     </div>
   {% endfor %}
   <div class="widget-box sm:col-span-2 md:col-span-3">
