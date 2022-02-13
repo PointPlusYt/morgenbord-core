@@ -30,7 +30,7 @@ class BoardController extends AbstractController
         // TEMP TO GET actual user
         // $this->getUser();
         $user = $userRepository->findOneBy([]);
-        $userWidget = $widgetRegistration->registerWidget($widgetDetails, $user);
+        $userWidget = $widgetRegistration->addUserWidget($widgetDetails, $user);
 
         return $this->redirectToRoute('board');
     }

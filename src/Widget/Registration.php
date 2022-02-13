@@ -54,7 +54,7 @@ class Registration
      * @param User $user
      * @return void
      */
-    public function registerWidget(array $widgetDetails, User $user)
+    public function addUserWidget(array $widgetDetails, User $user)
     {
         $registeredWidget = $this->getRegisteredWidget($widgetDetails['shortname']);
         

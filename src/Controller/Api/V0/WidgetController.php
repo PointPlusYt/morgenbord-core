@@ -29,7 +29,7 @@ class WidgetController extends AbstractController
         // TEMP TO GET actual user
         // $this->getUser();
         $user = $this->manager->getRepository(User::class)->findOneBy([]);
-        $userWidget = $widgetRegistration->registerWidget($widgetDetails, $user);
+        $userWidget = $widgetRegistration->addUserWidget($widgetDetails, $user);
 
         return $this->json([$this->widgets, $userWidget], 200, [], ['groups' => ['read']]);
     }
