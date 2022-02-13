@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Repository\UserRepository;
 use App\Repository\UserWidgetRepository;
-use App\Service\WidgetRegistration;
+use App\Widget\Registration;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -23,7 +23,7 @@ class BoardController extends AbstractController
     }
 
     #[Route('/add-widget', name: 'add_widget', methods: ['POST'])]
-    public function register(RequestStack $request, UserRepository $userRepository, WidgetRegistration $widgetRegistration): Response
+    public function register(RequestStack $request, UserRepository $userRepository, Registration $widgetRegistration): Response
     {        
         // get widget details from form or json
         $widgetDetails = $request->getCurrentRequest()->request->all();

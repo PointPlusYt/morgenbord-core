@@ -3,7 +3,7 @@
 namespace App\Controller\Api\V0;
 
 use App\Entity\User;
-use App\Service\WidgetRegistration;
+use App\Widget\Registration;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +22,7 @@ class WidgetController extends AbstractController
     }
 
     #[Route('', name: '_register', methods: ['POST'])]
-    public function register(WidgetRegistration $widgetRegistration): Response
+    public function register(Registration $widgetRegistration): Response
     {        
         // get widget details from form or json
         $widgetDetails = json_decode($this->request->getContent(), true);

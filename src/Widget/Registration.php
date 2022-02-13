@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Widget;
 
 use App\Entity\User;
 use App\Entity\UserWidget;
@@ -8,14 +8,14 @@ use App\Entity\Widget;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class WidgetRegistration
+class Registration
 {
     private $em;
     private $request;
     private $widgets;
     private $widgetParametersService;
 
-    public function __construct(EntityManagerInterface $em, RequestStack $requestStack, WidgetParametersService $widgetParametersService)
+    public function __construct(EntityManagerInterface $em, RequestStack $requestStack, ParametersService $widgetParametersService)
     {
         $this->em = $em;
         $this->request = $requestStack->getCurrentRequest();

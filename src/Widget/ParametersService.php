@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Service;
+namespace App\Widget;
 
 use App\Entity\UserWidget;
 use App\Entity\Widget;
 use Symfony\Component\Config\Definition\Processor;
 
-class WidgetParametersService
+class ParametersService
 {
     /**
      * Load widget parameters into the UserWidget
