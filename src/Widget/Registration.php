@@ -11,24 +11,24 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class Registration
 {
     private $em;
-    private $request;
+    private $parametersForms;
+    // private $request;
     private $widgets;
-    private $widgetParametersService;
 
-    public function __construct(EntityManagerInterface $em, RequestStack $requestStack, ParametersService $widgetParametersService)
+    public function __construct(EntityManagerInterface $em, ParametersForms $parametersForms, RequestStack $requestStack)
     {
+        $this->parametersForms = $parametersForms;
         $this->em = $em;
-        $this->request = $requestStack->getCurrentRequest();
+        // $this->request = $requestStack->getCurrentRequest();
         $this->widgets = $requestStack->getCurrentRequest()->widgets;
-        $this->widgetParametersService = $widgetParametersService;
     }
 
-    public function getRegisteredWidgets()
+    public function getRegisteredWidgets(): array
     {
         return $this->widgets;
     }
 
-    public function getRegisteredWidget($shortname)
+    public function getRegisteredWidget($shortname): Widget
     {
         return $this->widgets[$shortname];
     }
@@ -62,8 +62,7 @@ class Registration
         $userWidget = $this->createUserWidget($registeredWidget);
         $userWidget->setOwner($user);
 
-        // dd($widgetDetails);
-        $this->widgetParametersService->loadParameters($registeredWidget, $userWidget, $widgetDetails['widget_parameters']);
+        $this->parametersForms->loadParameters($registeredWidget, $userWidget, $widgetDetails['form']);
 
         $this->em->persist($userWidget);
         $this->em->flush();

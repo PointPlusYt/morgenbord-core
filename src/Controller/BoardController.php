@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\UserRepository;
 use App\Repository\UserWidgetRepository;
+use App\Widget\ParametersForms;
 use App\Widget\Registration;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class BoardController extends AbstractController
 {
     #[Route('/', name: 'board')]
-    public function index(Request $request, UserWidgetRepository $userWidgetRepository): Response
+    public function index(Request $request, UserWidgetRepository $userWidgetRepository, ParametersForms $parametersForms): Response
     {
         return $this->render('board.html.twig', [
             // TODO : make sure it's for the connected user

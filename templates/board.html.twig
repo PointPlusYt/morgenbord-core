@@ -9,10 +9,13 @@
     <ul class="list-none">
     {% for widget in app.request.widgets %}
         <li>
+            {% set form = get_widget_form(widget) %}
+            {{ form_start(form, {action: path('add_widget')}) }}
+            {{ form_widget(form) }}
+            <input type="hidden" name="shortname" value="{{ widget.shortname }}">
+            <button>Add {{ widget.name }}</button>
+            {{ form_end(form) }}
             <form action="{{ path('add_widget') }}" method="post">
-                <input type="hidden" name="shortname" value="{{ widget.shortname }}">
-                <input type="hidden" name="widget_parameters[auto_connect]" value="false">
-                <button>{{ widget.name }}</button>
         </li>    
     {% endfor %}
     </ul>
