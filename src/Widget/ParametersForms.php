@@ -64,6 +64,7 @@ class ParametersForms
      */
     public function processParameters(string $configurationFqcn, array $userParameters): array
     {
+        unset($userParameters['_token']);
         $form = $this->getFormFromFqcn($configurationFqcn);
         $form->submit($userParameters);
         return array_merge($form->getData(), $form->getExtraData());
