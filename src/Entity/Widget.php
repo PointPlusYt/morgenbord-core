@@ -24,13 +24,12 @@ class Widget
      * @ORM\Column(type="string", length=255)
      * @Groups({"read"})
      */
-    private $fqcn;
+    private $parameterFormFqcn;
 
     /**
-     * @ORM\Column(type="json")
-     * @Groups({"read"})
+     * @ORM\Column(type="string", length=255)
      */
-    private $parameters;
+    private $twigFile;
 
     public function getName()
     {
@@ -56,9 +55,9 @@ class Widget
         return $this;
     }
 
-    public function getFqcn()
+    public function getParameterFormFqcn()
     {
-        return $this->fqcn;
+        return $this->parameterFormFqcn;
     }
 
     /**
@@ -69,24 +68,24 @@ class Widget
      */
     public function getAtName(): string
     {
-        return preg_replace('/(.+)\\\\(\w+)Bundle$/', '@${2}', $this->fqcn);
+        return preg_replace('/(.+)\\\\(\w+)Parameters$/', '@${2}', $this->parameterFormFqcn);
     }
 
-    public function setFqcn($fqcn)
+    public function setParameterFormFqcn($fqcn)
     {
-        $this->fqcn = $fqcn;
+        $this->parameterFormFqcn = $fqcn;
 
         return $this;
     }
 
-    public function getParameters(): array
+    public function getTwigFile(): ?string
     {
-        return $this->parameters;
+        return $this->twigFile;
     }
 
-    public function setParameters(array $parameters): self
+    public function setTwigFile(string $twigFile): self
     {
-        $this->parameters = $parameters;
+        $this->twigFile = $twigFile;
 
         return $this;
     }

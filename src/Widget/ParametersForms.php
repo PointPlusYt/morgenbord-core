@@ -4,6 +4,7 @@ namespace App\Widget;
 
 use App\Entity\UserWidget;
 use App\Entity\Widget;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class ParametersForms
@@ -15,15 +16,18 @@ class ParametersForms
         $this->formFactory = $formFactory;
     }
 
-    public function getForm(Widget $widget)
+    public function getForm(Widget $widget, $crsfProtection = false)
     {
         $configurationFqcn = $this->getParametersFqcnFromWidget($widget);
-        return $this->getFormFromFqcn($configurationFqcn);
+        return $this->getFormFromFqcn($configurationFqcn, $crsfProtection);
     }
 
-    public function getFormFromFqcn(string $configurationFqcn)
+    public function getFormFromFqcn(string $configurationFqcn, $crsfProtection = false)
     {
-        $formBuilder = $this->formFactory->createBuilder();
+        $formBuilder = $this->formFactory->createBuilder(FormType::class, null, [
+            'csrf_protection' => $crsfProtection,
+            'allow_extra_fields' => true,
+        ]);
         $config = new $configurationFqcn();
         $config->createParametersForm($formBuilder);
 
@@ -32,7 +36,7 @@ class ParametersForms
 
     public function getParametersFqcnFromWidget(Widget $widget)
     {
-        return preg_replace('/Bundle$/', 'Parameters', $widget->getFqcn());
+        return preg_replace('/Bundle$/', 'Parameters', $widget->getParameterFormFqcn());
     }
 
     /**
@@ -43,18 +47,25 @@ class ParametersForms
      * @param array $userParameters User parameters to merge with default parameter values
      * @return void
      */
-    public function loadParameters(Widget $widget, UserWidget $userWidget, array $userParameters)
+    public function loadParameters(UserWidget $userWidget, array $userParameters)
     {
-        $configurationFqcn = $this->getParametersFqcnFromWidget($widget);
+        $configurationFqcn = $this->getParametersFqcnFromWidget($userWidget);
         $config = $this->processParameters($configurationFqcn, $userParameters);
         
         $userWidget->setParameters($config);
     }
     
-    public function processParameters(string $configurationFqcn, array $userParameters)
+    /**
+     * In any case, it takes the user's parameters and merges them with the default parameters
+     *
+     * @param string $configurationFqcn The FQCN of the widget's configuration class
+     * @param array $userParameters
+     * @return array
+     */
+    public function processParameters(string $configurationFqcn, array $userParameters): array
     {
         $form = $this->getFormFromFqcn($configurationFqcn);
         $form->submit($userParameters);
-        return $form->getData();
+        return array_merge($form->getData(), $form->getExtraData());
     }
 }

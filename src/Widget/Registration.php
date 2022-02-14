@@ -42,7 +42,8 @@ class Registration
     public function createUserWidget(Widget $registeredWidget): UserWidget
     {
         $userWidget = new UserWidget();
-        $userWidget->setFqcn($registeredWidget->getFqcn());
+        $userWidget->setParameterFormFqcn($registeredWidget->getParameterFormFqcn());
+        $userWidget->setTwigFile($registeredWidget->getTwigFile());
 
         return $userWidget;
     }
@@ -57,12 +58,12 @@ class Registration
     public function addUserWidget(array $widgetDetails, User $user)
     {
         $registeredWidget = $this->getRegisteredWidget($widgetDetails['shortname']);
-        
+        // dd($registeredWidget);
         // Créer un objet à mettre en BDD avec sa configuration.
         $userWidget = $this->createUserWidget($registeredWidget);
         $userWidget->setOwner($user);
 
-        $this->parametersForms->loadParameters($registeredWidget, $userWidget, $widgetDetails['form']);
+        $this->parametersForms->loadParameters($userWidget, $widgetDetails['form']);
 
         $this->em->persist($userWidget);
         $this->em->flush();

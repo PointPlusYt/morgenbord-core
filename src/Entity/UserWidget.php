@@ -26,6 +26,12 @@ class UserWidget extends Widget
      */
     private $owner;
 
+    /**
+     * @ORM\Column(type="json")
+     * @Groups({"read"})
+     */
+    private $parameters;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -39,6 +45,18 @@ class UserWidget extends Widget
     public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function getParameters(): array
+    {
+        return $this->parameters;
+    }
+
+    public function setParameters(array $parameters): self
+    {
+        $this->parameters = $parameters;
 
         return $this;
     }

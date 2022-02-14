@@ -1,5 +1,5 @@
 module.exports = {
-  content: ["./templates/**/*.html.twig"],
+  content: ["./templates/**/*.html.twig", "./var/cache/**/*.php"],
   darkMode: 'class',
   theme: {
     colors: {

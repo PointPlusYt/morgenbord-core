@@ -9,31 +9,20 @@
 - [ ] Write proper README file with installation instructions
 - [ ] Write docs in the repository
 
-## Features
-
-- [ ] Une seule page avec tout dedans
-- [ ] Agenda du jour avec liens vers les comptes d'agendas associés
-- [ ] Statistiques YouTube
-- [ ] Nombre d'emails non lus (pour chaque compte)
-- [ ] Liens préférés par catégories (documentation, musique, playlistes…)
-- [ ] Notifications Github non lues
-- [ ] Liste de tâches mémorisée, rapide et cochable
-- [ ] Gestion des habitudes avec des rappels par notifications
-- [ ] Pris de notes rapides
-- [ ] Articles Wallabag random (5) et nombre d'articles non lus
-- [ ] ~Data Duolingo avec rappel~ Impossible sans API adaptée, je mettrai le lien vers Duolingo à la place. L'occasion d'avoir un lien vers l'app si possible
-
 ## Widgets à créer
 
 - [ ] ToDo lists : Add mulitple ToDo lists with deadlines. Has the possibility to make the list public and share it
 - [ ] Habits : List habits and track when they are done. Create graphs for numbered habits and filled squares for done/undone habits
 - [ ] Agenda avec connexion CalDAV, avec un affichage en liste des événements à venir et possiblement plusieurs liens CalDAV
-- [ ] YTStats
+- [ ] YTStats : YouTube stats (views, likes, dislikes, comments, subscribers, etc.)
 - [ ] IMAP reader to get count unread emails
 - [ ] Favorite links : List of commonly used links
 - [ ] Github notifications
 - [ ] Notifications sur les transports locaux
 - [ ] Notifications sur la commune
+- [ ] Quick note taking
+- [ ] Wallabag : Random article and unread count
+- [ ] Note to self : add your Duolingo as a favorite link
 
 # MorgenBord
 
