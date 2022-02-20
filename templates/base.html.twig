@@ -3,19 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        {#
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-        #}
   <link rel="apple-touch-icon" sizes="76x76" href="{# asset{('assets/img/apple-icon.png')} #}">
   <link rel="icon" type="image/png" href="{# asset{('assets/img/favicon.png')} #}">
   <title>{% block title %}Welcome!{% endblock %}</title>
-  <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link id="pagestyle" href="{# asset{('assets/css/material-dashboard.css?v=3.0.0')} #}" rel="stylesheet" />
   {{ encore_entry_link_tags('fonts') }}
   {{ encore_entry_link_tags('tailwind') }}
+  {% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('board') }}
+  {% endblock %}
 </head>
 <body class="bg-gradient-to-b from-dark-blue via-dark-teal to-orange-300 font-sans font-normal min-h-screen p-4">
   {# <nav class="text-blue-grey dark:text-orange-300 font-bold flex flex-wrap place-content-between">

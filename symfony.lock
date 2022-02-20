@@ -112,6 +112,9 @@
     "monolog/monolog": {
         "version": "2.3.5"
     },
+    "morgenbord/checklist-widget-bundle": {
+        "version": "v0.1"
+    },
     "morgenbord/demo-widget-bundle": {
         "version": "1.0",
         "recipe": {

@@ -70,4 +70,16 @@ class Registration
 
         return $userWidget;
     }
+
+    public function editUserWidget(UserWidget $userWidget, array $widgetDetails)
+    {
+        $this->parametersForms->loadParameters($userWidget, $widgetDetails['form']);
+        $this->em->flush();
+    }
+
+    public function removeUserWidget(UserWidget $userWidget)
+    {
+        $this->em->remove($userWidget);
+        $this->em->flush();
+    }
 }

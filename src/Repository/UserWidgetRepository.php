@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\UserWidget;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,22 +20,22 @@ class UserWidgetRepository extends ServiceEntityRepository
         parent::__construct($registry, UserWidget::class);
     }
 
-    // /**
-    //  * @return UserWidget[] Returns an array of UserWidget objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Find all user widgets for a user, ordered by position
+     *
+     * @param User $user
+     * @return void
+     */
+    public function findByUser(User $user)
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('u.owner = :user')
+            ->setParameter('user', $user)
+            // ->orderBy('u.position', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?UserWidget

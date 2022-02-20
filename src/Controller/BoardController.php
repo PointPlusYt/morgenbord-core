@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\UserWidget;
 use App\Repository\UserRepository;
 use App\Repository\UserWidgetRepository;
 use App\Widget\ParametersForms;
@@ -18,14 +19,13 @@ class BoardController extends AbstractController
     public function index(Request $request, UserWidgetRepository $userWidgetRepository, ParametersForms $parametersForms): Response
     {
         return $this->render('board.html.twig', [
-            // TODO : make sure it's for the connected user
-            'userWidgets' => $userWidgetRepository->findAll(),
+            'userWidgets' => $userWidgetRepository->findByUser($this->getUser()),
         ]);
     }
 
     #[Route('/add-widget', name: 'add_widget', methods: ['POST'])]
-    public function register(RequestStack $request, UserRepository $userRepository, Registration $widgetRegistration): Response
-    {        
+    public function add(Registration $widgetRegistration, RequestStack $request, UserRepository $userRepository): Response
+    {
         // get widget details from form or json
         $widgetDetails = $request->getCurrentRequest()->request->all();
         // TEMP TO GET actual user
@@ -33,6 +33,30 @@ class BoardController extends AbstractController
         $user = $userRepository->findOneBy([]);
         $userWidget = $widgetRegistration->addUserWidget($widgetDetails, $user);
 
+        return $this->redirectToRoute('board');
+    }
+
+    #[Route('/edit-widget/{id}', name: 'edit_widget')]
+    public function edit(ParametersForms $parametersForms, Registration $widgetRegistration, RequestStack $request, UserWidget $userWidget): Response
+    {
+        if ($request->getCurrentRequest()->getMethod() === 'POST') {
+            $widgetDetails = $request->getCurrentRequest()->request->all();
+            $userWidget = $widgetRegistration->editUserWidget($userWidget, $widgetDetails);
+            return $this->redirectToRoute('board');
+        } else {
+            $form = $parametersForms->getForm($userWidget);
+            $form->submit($userWidget->getParameters());
+            return $this->render('edit_widget.html.twig', [
+                'form' => $form->createView(),
+                'userWidget' => $userWidget,
+            ]);
+        }
+    }
+
+    #[Route('/remove-widget/{id}', name: 'remove_widget')]
+    public function remove(Registration $widgetRegistration, UserWidget $userWidget): Response
+    {
+        $userWidget = $widgetRegistration->removeUserWidget($userWidget);
         return $this->redirectToRoute('board');
     }
 }

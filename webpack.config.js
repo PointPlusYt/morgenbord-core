@@ -1,10 +1,42 @@
 const Encore = require('@symfony/webpack-encore');
+const { readdirSync } = require('fs')
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
 if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
 }
+
+const source = './public/bundles';
+const bundlesList = readdirSync(source, { withFileTypes: true });
+let entries = {};
+bundlesList.filter(dir => dir.isDirectory())
+    .forEach(dir => {
+        const widgetDir = source+'/'+dir.name;
+        const files = readdirSync(widgetDir, { withFileTypes: true });
+        files.forEach(file => {
+            console.log(file.name.replace(/\.[^/.]+$/, ""));
+            console.log(widgetDir+'/'+file.name);
+            entries[file.name.replace(/\.[^/.]+$/, "")] = widgetDir + '/' + file.name;
+        })
+    });
+
+// const getJsFiles = async (source, Encore) =>
+//   (await readdir(source, { withFileTypes: true }))
+//      // find widgets' directories
+//     .filter(dir => dir.isDirectory())
+//     .forEach(dir => {
+//         const widgetDir = source+'/'+dir.name;
+//         readdir(widgetDir, { withFileTypes: true })
+//         // .then((files) => console.log(files))
+//         .then(files => {
+//             files.forEach(file => {
+                
+//                 console.log(file.name.replace(/\.[^/.]+$/, ""));
+//                 console.log(widgetDir+'/'+file.name);
+//             })
+//         })
+//     })
 
 Encore
     // directory where compiled assets will be stored
@@ -13,14 +45,11 @@ Encore
     .setPublicPath('/build')
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
-    .enableVueLoader()
-    /*
-     * ENTRY CONFIG
-     *
-     * Each entry will result in one JavaScript file (e.g. app.js)
-     * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
-     */
+    .enableVueLoader(() => {}, {
+        version: 3,
+    })
     .addEntry('app', './assets/app.js')
+    .addEntry('board', './assets/board.js')
     .addStyleEntry('tailwind', './assets/css/tailwind.css')
     // .addStyleEntry('font-fira', './assets/fonts/fira-sans.css')
     .addStyleEntry('fonts', './assets/fonts.js')
@@ -30,6 +59,7 @@ Encore
                 path: './assets/postcss.config.js'
         };
     })
+    .addEntries(entries)
     // .copyFiles({
     //     from: './assets/fonts/FiraSans',
     //     to: 'fonts/[name].[ext]'
@@ -84,5 +114,7 @@ Encore
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
 ;
+
+console.log(Encore.getWebpackConfig().entry);
 
 module.exports = Encore.getWebpackConfig();
