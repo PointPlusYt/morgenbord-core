@@ -51,3 +51,7 @@ Inspiration : https://www.shutterstock.com/fr/image-photo/color-palette-blue-ora
 #7d716d - Grey
 #3c3c1c - Herbs
 Inspiration : https://icolorpalette.com/imagepalette/sky_cloud_nature-45
+
+
+https://www.chartjs.org/
+https://unsplash.com/photos/sYffw0LNr7s

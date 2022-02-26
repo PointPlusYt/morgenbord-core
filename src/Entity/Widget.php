@@ -11,18 +11,18 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Widget
 {
     /**
-     * @Groups({"read"})
+     * @Groups({"widget"})
      */
     private $name;
 
     /**
-     * @Groups({"read"})
+     * @Groups({"widget"})
      */
     private $shortName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read"})
+     * @Groups({"widget"})
      */
     private $parameterFormFqcn;
 

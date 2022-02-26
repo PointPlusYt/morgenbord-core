@@ -1,5 +1,10 @@
 module.exports = {
-  content: ["./templates/**/*.html.twig", "./var/cache/**/*.php"],
+  content: [
+    "./templates/**/*.html.twig",
+    "./var/cache/**/*.php",
+    "./public/bundles/**/*.vue",
+    // "./public/bundles/checklistwidget/Checklist.vue"
+  ],
   darkMode: 'class',
   theme: {
     colors: {

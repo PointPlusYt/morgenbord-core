@@ -22,14 +22,22 @@ class ParametersForms
         return $this->getFormFromFqcn($configurationFqcn, $crsfProtection);
     }
 
-    public function getFormFromFqcn(string $configurationFqcn, $crsfProtection = false)
+    public function getFormBuilderFromFqcn(string $configurationFqcn, $crsfProtection = false)
     {
         $formBuilder = $this->formFactory->createBuilder(FormType::class, null, [
             'csrf_protection' => $crsfProtection,
             'allow_extra_fields' => true,
         ]);
+
         $config = new $configurationFqcn();
         $config->createParametersForm($formBuilder);
+
+        return $formBuilder;
+    }
+
+    public function getFormFromFqcn(string $configurationFqcn, $crsfProtection = false)
+    {
+        $formBuilder = $this->getFormBuilderFromFqcn($configurationFqcn, $crsfProtection);
 
         return $formBuilder->getForm();
     }

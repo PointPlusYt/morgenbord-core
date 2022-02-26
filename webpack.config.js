@@ -1,25 +1,10 @@
 const Encore = require('@symfony/webpack-encore');
-const { readdirSync } = require('fs')
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
 if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
 }
-
-const source = './public/bundles';
-const bundlesList = readdirSync(source, { withFileTypes: true });
-let entries = {};
-bundlesList.filter(dir => dir.isDirectory())
-    .forEach(dir => {
-        const widgetDir = source+'/'+dir.name;
-        const files = readdirSync(widgetDir, { withFileTypes: true });
-        files.forEach(file => {
-            console.log(file.name.replace(/\.[^/.]+$/, ""));
-            console.log(widgetDir+'/'+file.name);
-            entries[file.name.replace(/\.[^/.]+$/, "")] = widgetDir + '/' + file.name;
-        })
-    });
 
 // const getJsFiles = async (source, Encore) =>
 //   (await readdir(source, { withFileTypes: true }))
@@ -48,6 +33,10 @@ Encore
     .enableVueLoader(() => {}, {
         version: 3,
     })
+    .configureDefinePlugin((options) => {
+        options.__VUE_OPTIONS_API__ = true;
+        options.__VUE_PROD_DEVTOOLS__ = false;
+    })
     .addEntry('app', './assets/app.js')
     .addEntry('board', './assets/board.js')
     .addStyleEntry('tailwind', './assets/css/tailwind.css')
@@ -59,7 +48,7 @@ Encore
                 path: './assets/postcss.config.js'
         };
     })
-    .addEntries(entries)
+    // .addEntries(entries)
     // .copyFiles({
     //     from: './assets/fonts/FiraSans',
     //     to: 'fonts/[name].[ext]'
@@ -114,7 +103,5 @@ Encore
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
 ;
-
-console.log(Encore.getWebpackConfig().entry);
 
 module.exports = Encore.getWebpackConfig();

@@ -15,22 +15,27 @@ class UserWidget extends Widget
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"read"})
+     * @Groups({"widget"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="userWidgets")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"read"})
+     * @Groups({"widget"})
      */
     private $owner;
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"read"})
+     * @Groups({"widget"})
      */
     private $parameters;
+
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $data = [];
 
     public function getId(): ?int
     {
@@ -57,6 +62,18 @@ class UserWidget extends Widget
     public function setParameters(array $parameters): self
     {
         $this->parameters = $parameters;
+
+        return $this;
+    }
+
+    public function getData(): ?array
+    {
+        return $this->data;
+    }
+
+    public function setData(?array $data): self
+    {
+        $this->data = $data;
 
         return $this;
     }
